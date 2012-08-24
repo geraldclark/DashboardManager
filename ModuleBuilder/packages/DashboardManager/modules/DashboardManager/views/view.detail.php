@@ -1,0 +1,78 @@
+<?php
+
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+ /*********************************************************************************
+ * The contents of this file are subject to the SugarCRM Master Subscription
+ * Agreement ("License") which can be viewed at
+ * http://www.sugarcrm.com/crm/master-subscription-agreement
+ * By installing or using this file, You have unconditionally agreed to the
+ * terms and conditions of the License, and You may not use this file except in
+ * compliance with the License.  Under the terms of the license, You shall not,
+ * among other things: 1) sublicense, resell, rent, lease, redistribute, assign
+ * or otherwise transfer Your rights to the Software, and 2) use the Software
+ * for timesharing or service bureau purposes such as hosting the Software for
+ * commercial gain and/or for the benefit of a third party.  Use of the Software
+ * may be subject to applicable fees and any use of the Software without first
+ * paying applicable fees is strictly prohibited.  You do not have the right to
+ * remove SugarCRM copyrights from the source code or user interface.
+ *
+ * All copies of the Covered Code must include on each user interface screen:
+ *  (i) the "Powered by SugarCRM" logo and
+ *  (ii) the SugarCRM copyright notice
+ * in the same form as they appear in the distribution.  See full license for
+ * requirements.
+ *
+ * Your Warranty, Limitations of liability and Indemnity are expressly stated
+ * in the License.  Please refer to the License for the specific language
+ * governing these rights and limitations under the License.  Portions created
+ * by SugarCRM are Copyright (C) 2004-2012 SugarCRM, Inc.; All Rights Reserved.
+ ********************************************************************************/
+
+class dash_DashboardManagerViewDetail extends ViewDetail
+{
+ 	public function __construct()
+ 	{
+ 		parent::ViewDetail();
+ 	}
+
+ 	public function display()
+ 	{
+        global $current_user, $current_language, $sugar_flavor, $sugar_config;
+
+        if(!$current_user->is_admin)
+        {
+            sugar_die(translate("LBL_MUST_BE_ADMIN"));
+        }
+
+        $this->bean->setDashboardForUser($current_user);
+
+        parent::display();
+
+        //get language for dashboard
+        $mod_strings = return_module_language($current_language, 'Home');
+
+        //render dashboard
+        $lock_homepage = $sugar_config['lock_homepage'];
+        $sugar_config['lock_homepage'] = true;
+        require_once("modules/Home/index.php");
+        $sugar_config['lock_homepage'] = $lock_homepage;
+
+        /*
+        $help_img = SugarThemeRegistry::current()->getImage('helpInline','border="0" onclick="jQuery(\'#SubpanelHelp\').toggle();" onmouseout="return nd();" onmouseover="return overlib(\'Click to expand subpanel help.\', FGCLASS, \'olFgClass\', CGCLASS, \'olCgClass\', BGCLASS, \'olBgClass\', TEXTFONTCLASS, \'olFontClass\', CAPTIONFONTCLASS, \'olCapFontClass\', CLOSEFONTCLASS, \'olCloseFontClass\');"',null,null,'.gif', "Subpanel Help");
+
+        $HTML =<<<HTML
+
+            <script type="text/javascript">
+
+            </script>
+
+            <h1>Subpanel Help {$help_img}</h1>
+
+            </div>
+            <p><br>
+HTML;
+        echo $HTML;
+        */
+ 	}
+}
