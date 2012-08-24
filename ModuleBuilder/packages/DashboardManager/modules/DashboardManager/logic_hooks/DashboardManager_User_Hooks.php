@@ -1,9 +1,9 @@
 <?php
 
-	if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+    if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
-	class DashboardManager_User_Hooks
-	{
+    class DashboardManager_User_Hooks
+    {
         function forceRelationshipPolicy(&$bean, $event, $arguments)
         {
             if (
@@ -22,6 +22,6 @@
                 $dashManagerObj->forceRelationshipPolicy($arguments['relationship'], $bean);
             }
         }
-	}
+    }
 
 ?>
