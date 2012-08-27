@@ -165,7 +165,7 @@ class dash_DashboardBackups extends dash_DashboardBackups_sugar
             $userObj = $current_user;
         }
 
-        $GLOBALS['log']->info("Dashboard Manager :: Creating Dashboard Backup | Template: {$dm_id} / User: {$userObj->user_name} / Type: {$type}");
+        $GLOBALS['log']->info("Dashboard Manager :: Creating Dashboard Backup | Template: {$dm_id} / User: {$userObj->user_name} / Type: {$name}");
 
         $this->name = $name;
         $this->description = $description;
