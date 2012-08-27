@@ -29,6 +29,10 @@ function removeTab(tab_id)
 {
     document.EditView.action.value = 'RemoveTabSave';
     jQuery('#EditView').append('<input type="hidden" id="TabToRemover" name="TabToRemove" value="'+ tab_id +'" />');
+
+    //hack to prevent sugar confirm submission
+    editViewSnapshots = new Object();
+
     SUGAR.ajaxUI.submitForm(document.EditView);
 }
 
