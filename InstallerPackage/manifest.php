@@ -30,7 +30,7 @@ $manifest = array (
   0 => 
   array (
     'acceptable_sugar_versions' => array (
-        'regex_matches' => array ("6\.4\.*", "6\.5\.*"),
+        'regex_matches' => array ("6\.5\.*"),
     ),
   ),
   1 => 
@@ -40,13 +40,13 @@ $manifest = array (
   'readme' => '',
   'key' => 'dash',
   'author' => 'jclark',
-  'description' => 'Dashboard Manager: Supported on 6.4.0-6.5.x',
+  'description' => 'Dashboard Manager: Supported on 6.5.x',
   'icon' => '',
   'is_uninstallable' => true,
   'name' => 'Dashboard Manager',
-  'published_date' => '2012-08-24 03:17:01',
+  'published_date' => '2012-10-29 06:07:05',
   'type' => 'module',
-  'version' => '1.0',
+  'version' => '1.5',
   'remove_tables' => 'prompt',
 );
 

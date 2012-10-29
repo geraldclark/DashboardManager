@@ -42,12 +42,9 @@ if ($vesionCheck)
     {
         //check if we need to lock dashboard
         $dashManagerObj->checkLock();
-
         $page_js_array = $dashManagerObj->getRestrictedPageKeysForJS();
 
         $HTML=<<<HTML
-
-                <script type="text/javascript" src="modules/dash_DashboardManager/lib/jquery-1.7.2.min.js"></script>
 
                 <script type="text/javascript">
 
@@ -56,9 +53,9 @@ if ($vesionCheck)
                         return {$page_js_array}
                     }
 
-                    SUGAR.util.doWhen("document.getElementById('add_page') != null && typeof jQuery != 'undefined'", function(){
+                    SUGAR.util.doWhen("document.getElementById('add_page') != null && typeof $ != 'undefined'", function(){
 
-                        jQuery.noConflict();
+                        $.noConflict();
 
                         //handle user page actions
                         templatePages = getRestrictedPages();
@@ -66,11 +63,11 @@ if ($vesionCheck)
                         for (var i = 0; i < templatePages.length; i++)
                         {
                             //handle tab delete
-                            jQuery("#pageNum_"+i+"_delete_page_img").attr("onclick", "");
-                            jQuery("#pageNum_"+i+"_delete_page_img").attr("class", "");
+                            $("#pageNum_"+i+"_delete_page_img").attr("onclick", "");
+                            $("#pageNum_"+i+"_delete_page_img").attr("class", "");
 
                             //rename tab
-                            jQuery("#pageNum_"+i+"_title_text").attr("ondblclick", "");
+                            $("#pageNum_"+i+"_title_text").attr("ondblclick", "");
                         }
 
                     });
@@ -87,8 +84,6 @@ HTML;
         $page_js_array = $dashManagerObj->getRestrictedPageKeysForJS();
 
         $HTML=<<<HTML
-
-                <script type="text/javascript" src="modules/dash_DashboardManager/lib/jquery-1.7.2.min.js"></script>
 
                 <script type="text/javascript">
 
@@ -120,20 +115,20 @@ HTML;
 
                     function hideActions()
                     {
-                        jQuery('#change_layout').hide();
-                        jQuery('#add_dashlets').hide();
+                        $('#change_layout').hide();
+                        $('#add_dashlets').hide();
                     }
 
                     function showActions()
                     {
-                        jQuery('#change_layout').show();
-                        jQuery('#add_dashlets').show();
+                        $('#change_layout').show();
+                        $('#add_dashlets').show();
                     }
 
                     function removeDashDelete(id)
                     {
-                        jQuery("#pageNum_"+id+"_div .dashletToolSet").each(function(){
-                            jQuery(this).children("a:eq(2)").remove();
+                        $("#pageNum_"+id+"_div .dashletToolSet").each(function(){
+                            $(this).children("a:eq(2)").remove();
                         });
                     }
 
@@ -155,7 +150,7 @@ HTML;
                             {
                                 removeDashDelete(id);
 
-                                jQuery("#pageNum_"+id+"_div").hover(function(){
+                                $("#pageNum_"+id+"_div").hover(function(){
                                     removeDashDelete(id);
                                 });
 
@@ -191,7 +186,7 @@ HTML;
 
                     function newTabAppend()
                     {
-                        var tabcount = jQuery('#tabList').children().length;
+                        var tabcount = $('#tabList').children().length;
 
                         SUGAR.util.doWhen("document.getElementById('pageNum_"+tabcount+"_delete_page_img') != null", function(){
                             checkPageToggle(tabcount);
@@ -239,9 +234,7 @@ HTML;
 
                     });
 
-                    SUGAR.util.doWhen("document.getElementById('add_page') != null && typeof jQuery != 'undefined'", function(){
-
-                        jQuery.noConflict();
+                    SUGAR.util.doWhen("document.getElementById('add_page') != null && typeof $ != 'undefined'", function(){
 
                         //handle user page actions
                         templatePages = getRestrictedPages();
@@ -249,29 +242,29 @@ HTML;
                         for (var i = 0; i < templatePages.length; i++)
                         {
                             //handle tab delete
-                            jQuery("#pageNum_"+i+"_delete_page_img").attr("onclick", "");
-                            jQuery("#pageNum_"+i+"_delete_page_img").attr("class", "");
+                            $("#pageNum_"+i+"_delete_page_img").attr("onclick", "");
+                            $("#pageNum_"+i+"_delete_page_img").attr("class", "");
 
                             //rename tab
-                            jQuery("#pageNum_"+i+"_title_text").attr("ondblclick", "");
+                            $("#pageNum_"+i+"_title_text").attr("ondblclick", "");
                         }
 
                         //handle page toggles
-                        tabcount = jQuery('#tabList').children().length;
+                        tabcount = $('#tabList').children().length;
                         for (i=0; i<tabcount; i++)
                         {
-                            jQuery("#pageNum_"+i+"_anchor").attr("href", "javascript:checkPageToggle('"+i+"');");
+                            $("#pageNum_"+i+"_anchor").attr("href", "javascript:checkPageToggle('"+i+"');");
                         }
 
                         //get add page onclick event
-                        AddPageOnclick = jQuery('#add_page').attr("onclick");
+                        AddPageOnclick = $('#add_page').attr("onclick");
 
                         //append new check
-                        jQuery('#add_page').attr("onclick", "newTabAppend();" + AddPageOnclick);
+                        $('#add_page').attr("onclick", "newTabAppend();" + AddPageOnclick);
 
                     });
 
-                    SUGAR.util.doWhen("SUGAR.mySugar != null && typeof jQuery != 'undefined'", function(){
+                    SUGAR.util.doWhen("SUGAR.mySugar != null && typeof $ != 'undefined'", function(){
                         checkCurrentPage();
                     });
 

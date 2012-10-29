@@ -8,11 +8,7 @@ array (
     array (
       'includes' => 
       array (
-        0 => 
-        array (
-          'file' => 'modules/dash_DashboardManager/lib/jquery-1.7.2.min.js',
-        ),
-        1 => 
+        0 =>
         array (
           'file' => 'modules/dash_DashboardBackups/views/detail.js',
         ),

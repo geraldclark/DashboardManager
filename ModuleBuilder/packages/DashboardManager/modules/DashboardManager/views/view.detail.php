@@ -57,22 +57,5 @@ class dash_DashboardManagerViewDetail extends ViewDetail
         $sugar_config['lock_homepage'] = true;
         require_once("modules/Home/index.php");
         $sugar_config['lock_homepage'] = $lock_homepage;
-
-        /*
-        $help_img = SugarThemeRegistry::current()->getImage('helpInline','border="0" onclick="jQuery(\'#SubpanelHelp\').toggle();" onmouseout="return nd();" onmouseover="return overlib(\'Click to expand subpanel help.\', FGCLASS, \'olFgClass\', CGCLASS, \'olCgClass\', BGCLASS, \'olBgClass\', TEXTFONTCLASS, \'olFontClass\', CAPTIONFONTCLASS, \'olCapFontClass\', CLOSEFONTCLASS, \'olCloseFontClass\');"',null,null,'.gif', "Subpanel Help");
-
-        $HTML =<<<HTML
-
-            <script type="text/javascript">
-
-            </script>
-
-            <h1>Subpanel Help {$help_img}</h1>
-
-            </div>
-            <p><br>
-HTML;
-        echo $HTML;
-        */
  	}
 }

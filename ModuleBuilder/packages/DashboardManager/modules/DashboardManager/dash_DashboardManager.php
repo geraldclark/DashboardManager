@@ -316,7 +316,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
         global $sugar_version;
 
         $match = false;
-        $min_version = '6.4.0';
+        $min_version = '6.5.0';
         $max_version = '6.5.9';
 
         if ($sugar_version <= $max_version && $sugar_version >= $min_version)
