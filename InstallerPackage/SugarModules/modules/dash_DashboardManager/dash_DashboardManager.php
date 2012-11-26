@@ -311,21 +311,27 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     * @param object $userObj User Obj to set dashboard for. Empty assumes the current user.
     * @return bool $match Tells if version is supported
     */
-    function checkversion()
+    function checkVersion()
     {
         global $sugar_version;
 
         $match = false;
-        $min_version = '6.5.0';
-        $max_version = '6.5.9';
 
-        if ($sugar_version <= $max_version && $sugar_version >= $min_version)
+        $regexList = array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)');
+
+        $match = false;
+        foreach($regexList as $regex)
         {
-            $match = true;
+            if (preg_match("/{$regex}/", $sugar_version))
+            {
+                $match = true;
+                break;
+            }
         }
-        else
+
+        if (!$match)
         {
-            $GLOBALS['log']->info("Dashboard Manager :: Version check failed | Current version: {$sugar_version} / Acceptable versions: {$min_version}-{$max_version} ");
+            $GLOBALS['log']->fatal("Dashboard Manager :: Version check failed | Current version: {$sugar_version} | Regex List: " . implode(", ", $regexList) . " | Please check SugarForge for an updated package.");
         }
 
         return $match;

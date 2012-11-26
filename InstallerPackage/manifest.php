@@ -27,27 +27,21 @@
  ********************************************************************************/
 
 $manifest = array (
-  0 => 
-  array (
     'acceptable_sugar_versions' => array (
-        'regex_matches' => array ("6\.5\.*"),
+        'regex_matches' => array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)'),
     ),
-  ),
-  1 => 
-  array (
     'acceptable_sugar_flavors' => array ('CE','PRO','CORP','ENT','ULT'),
-  ),
-  'readme' => '',
-  'key' => 'dash',
-  'author' => 'jclark',
-  'description' => 'Dashboard Manager: Supported on 6.5.x',
-  'icon' => '',
-  'is_uninstallable' => true,
-  'name' => 'Dashboard Manager',
-  'published_date' => '2012-10-29 06:07:05',
-  'type' => 'module',
-  'version' => '1.5',
-  'remove_tables' => 'prompt',
+    'readme' => '',
+    'key' => 'dash',
+    'author' => 'jclark',
+    'description' => 'Dashboard Manager: Supported on 6.5.x and 6.6.x',
+    'icon' => '',
+    'is_uninstallable' => true,
+    'name' => 'Dashboard Manager',
+    'published_date' => '2012-11-26 12:14:07',
+    'type' => 'module',
+    'version' => '1.6',
+    'remove_tables' => 'prompt',
 );
 
 $installdefs = array (
