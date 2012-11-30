@@ -55,8 +55,6 @@ if ($vesionCheck)
 
                     SUGAR.util.doWhen("document.getElementById('add_page') != null && typeof $ != 'undefined'", function(){
 
-                        $.noConflict();
-
                         //handle user page actions
                         templatePages = getRestrictedPages();
 
