@@ -8,9 +8,12 @@ array (
     array (
       'name' => 
       array (
-        'name' => 'name',
-        'default' => true,
+        'type' => 'name',
+        'link' => true,
+        'label' => 'LBL_NAME',
         'width' => '10%',
+        'default' => true,
+        'name' => 'name',
       ),
       'description' => 
       array (
@@ -21,6 +24,16 @@ array (
         'default' => true,
         'name' => 'description',
       ),
+      'assigned_user_name' => 
+      array (
+        'link' => true,
+        'type' => 'relate',
+        'label' => 'LBL_ASSIGNED_TO_NAME',
+        'id' => 'ASSIGNED_USER_ID',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'assigned_user_name',
+      ),
       'user_default' => 
       array (
         'type' => 'bool',
@@ -29,17 +42,13 @@ array (
         'width' => '10%',
         'name' => 'user_default',
       ),
-      'date_entered' => 
+      'created_by' => 
       array (
-        'type' => 'datetime',
-        'studio' => 
-        array (
-          'portaleditview' => false,
-        ),
-        'label' => 'LBL_DATE_ENTERED',
+        'type' => 'assigned_user_name',
+        'label' => 'LBL_CREATED',
         'width' => '10%',
         'default' => true,
-        'name' => 'date_entered',
+        'name' => 'created_by',
       ),
     ),
     'advanced_search' => 
