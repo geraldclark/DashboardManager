@@ -181,7 +181,7 @@ $installdefs = array (
     ),
     7 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardBackups.php',
+      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardBackups.fr_FR.php',
       'to_module' => 'dash_DashboardBackups',
       'language' => 'fr_FR',
     ),
@@ -337,7 +337,7 @@ $installdefs = array (
     ),
     33 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.php',
+      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.fr_FR.php',
       'to_module' => 'dash_DashboardManager',
       'language' => 'fr_FR',
     ),
@@ -493,7 +493,7 @@ $installdefs = array (
     ),
     59 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/Users.php',
+      'from' => '<basepath>/SugarModules/relationships/language/Users.fr_FR.php',
       'to_module' => 'Users',
       'language' => 'fr_FR',
     ),
@@ -649,7 +649,7 @@ $installdefs = array (
     ),
     85 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.php',
+      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.fr_FR.php',
       'to_module' => 'dash_DashboardManager',
       'language' => 'fr_FR',
     ),
@@ -805,7 +805,7 @@ $installdefs = array (
     ),
     111 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/Users.php',
+      'from' => '<basepath>/SugarModules/relationships/language/Users.fr_FR.php',
       'to_module' => 'Users',
       'language' => 'fr_FR',
     ),
@@ -961,7 +961,7 @@ $installdefs = array (
     ),
     137 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.php',
+      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.fr_FR.php',
       'to_module' => 'dash_DashboardManager',
       'language' => 'fr_FR',
     ),
@@ -1117,7 +1117,7 @@ $installdefs = array (
     ),
     163 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/Users.php',
+      'from' => '<basepath>/SugarModules/relationships/language/Users.fr_FR.php',
       'to_module' => 'Users',
       'language' => 'fr_FR',
     ),
@@ -1273,7 +1273,7 @@ $installdefs = array (
     ),
     189 => 
     array (
-      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.php',
+      'from' => '<basepath>/SugarModules/relationships/language/dash_DashboardManager.fr_FR.php',
       'to_module' => 'dash_DashboardManager',
       'language' => 'fr_FR',
     ),
@@ -1393,15 +1393,33 @@ $installdefs = array (
     ),
     209 =>
     array (
+      'from' => '<basepath>/SugarModules/language/application/fr_FR.lang.php',
+      'to_module' => 'application',
+      'language' => 'fr_FR',
+    ),    
+    210 =>
+    array (
       'from' => '<basepath>/Files/custom/Extension/modules/Administration/Ext/Language/DashboardManager.php',
       'to_module' => 'Administration',
       'language' => 'en_us',
     ),
-    210 =>
+    211 =>
+    array (
+      'from' => '<basepath>/Files/custom/Extension/modules/Administration/Ext/Language/DashboardManager.fr_FR.php',
+      'to_module' => 'Administration',
+      'language' => 'fr_FR',
+    ),    
+    212 =>
     array (
       'from' => '<basepath>/Files/custom/Extension/modules/Home/Ext/Language/DashboardManager.php',
       'to_module' => 'Home',
       'language' => 'en_us',
+    ),
+    213 =>
+    array (
+      'from' => '<basepath>/Files/custom/Extension/modules/Home/Ext/Language/DashboardManager.fr_FR.php',
+      'to_module' => 'Home',
+      'language' => 'fr_FR',
     ),
   ),
   'administration'=>
