@@ -1,6 +1,6 @@
 <?PHP
 
- /*********************************************************************************
+/*********************************************************************************
  * The contents of this file are subject to the SugarCRM Master Subscription
  * Agreement ("License") which can be viewed at
  * http://www.sugarcrm.com/crm/master-subscription-agreement
@@ -27,7 +27,7 @@
  * by SugarCRM are Copyright (C) 2004-2012 SugarCRM, Inc.; All Rights Reserved.
  ********************************************************************************/
 
- /**
+/**
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
 
@@ -51,18 +51,18 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     var $forced_pages_id = "dash_dashboardmanager_users_2dash_dashboardmanager_ida";
     var $forced_pages_rel = "dash_dashboardmanager_users_2";
 
-	function dash_DashboardManager()
+    function dash_DashboardManager()
     {
-		parent::dash_DashboardManager_sugar();
-	}
+        parent::dash_DashboardManager_sugar();
+    }
 
     /**
-    * Function fetches a single row of data given the primary key value.
-    *
-    * @param string $id Optional, default -1, is set to -1 id value from the bean is used, else, passed value is used
-    * @param boolean $encode Optional, default true, encodes the values fetched from the database.
-    * @param boolean $deleted Optional, default true, if set to false deleted filter will not be added.
-    */
+     * Function fetches a single row of data given the primary key value.
+     *
+     * @param string $id Optional, default -1, is set to -1 id value from the bean is used, else, passed value is used
+     * @param boolean $encode Optional, default true, encodes the values fetched from the database.
+     * @param boolean $deleted Optional, default true, if set to false deleted filter will not be added.
+     */
     function retrieve($id = -1, $encode=true, $deleted=true)
     {
         $bean = parent::retrieve($id, $encode, $deleted);
@@ -74,10 +74,10 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Function to convert matching errors to a string
-    *
-    * @param boolean $clear_errors Optional, clears errors in case you want to do further logic with bean
-    */
+     * Function to convert matching errors to a string
+     *
+     * @param boolean $clear_errors Optional, clears errors in case you want to do further logic with bean
+     */
     function getCheckErrors($clear_errors = true)
     {
         $error_string = '';
@@ -97,10 +97,10 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Delete a page by its page_key
-    *
-    * @param array $new_pages New page arrangement.
-    */
+     * Delete a page by its page_key
+     *
+     * @param array $new_pages New page arrangement.
+     */
     function deletePageByKey($page_key, $pages)
     {
         if (empty($page_key))
@@ -125,10 +125,10 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Saves the Dashboard Template
-    *
-    * @param boolean $check_notify Optional, default false, if set to true assignee of the record is notified via email.
-    */
+     * Saves the Dashboard Template
+     *
+     * @param boolean $check_notify Optional, default false, if set to true assignee of the record is notified via email.
+     */
     function save($check_notify = FALSE)
     {
         //workaround for create record not populating fields
@@ -146,8 +146,8 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
         global $current_user;
 
         //get current user dash so we can save it
-        $this->unencoded_pages = $current_user->getPreference('pages', 'Home');
-        $this->unencoded_dashlets = $current_user->getPreference('dashlets', 'Home');
+        $this->unencoded_pages = $this->getUserPreference($current_user, 'pages', 'Home');
+        $this->unencoded_dashlets = $this->getUserPreference($current_user, 'dashlets', 'Home');
 
         //check for identifiers
         $this->setIdentifiers();
@@ -165,8 +165,8 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Decodes the base64 encoded dashboard for use with the bean
-    */
+     * Decodes the base64 encoded dashboard for use with the bean
+     */
     function setUnencodedDashboard()
     {
         $this->unencoded_pages = unserialize(base64_decode($this->encoded_pages));
@@ -177,12 +177,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Used when forcing a template to a user. Allows us to keep users old settings assuming they have had a template forced to them before.
-    *
-    * DO NOT USE THIS METHOD AND SAVE THE BEAN
-    *
-    * @param array $options list of options and the identifiers they belong to
-    */
+     * Used when forcing a template to a user. Allows us to keep users old settings assuming they have had a template forced to them before.
+     *
+     * DO NOT USE THIS METHOD AND SAVE THE BEAN
+     *
+     * @param array $options list of options and the identifiers they belong to
+     */
     function setOptionsToTemplate($options)
     {
         foreach ($this->temp_unencoded_dashlets as $key=>$value)
@@ -198,9 +198,9 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Checks if the current retrieve dashboard has identifiers. If not, identifier is generated.
-    * This is a hack that may need to be altered in the future.
-    */
+     * Checks if the current retrieve dashboard has identifiers. If not, identifier is generated.
+     * This is a hack that may need to be altered in the future.
+     */
     function setIdentifiers()
     {
         //handle pages
@@ -225,9 +225,9 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Generates new keys for the dashlets (These are not identifiers).
-    * This is to avoid any key conflicts between users and dashboards.
-    */
+     * Generates new keys for the dashlets (These are not identifiers).
+     * This is to avoid any key conflicts between users and dashboards.
+     */
     function setUniqueDashlets()
     {
         //get new dashlet ids
@@ -280,11 +280,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Sets the currently retrieved dashboard template to a user
-    *
-    * @param object $userObj User Obj to set dashboard
-    * @param boolean $reset clear temp bean after save
-    */
+     * Sets the currently retrieved dashboard template to a user
+     *
+     * @param object $userObj User Obj to set dashboard
+     * @param boolean $reset clear temp bean after save
+     */
     function setDashboardForUser($userObj, $reset=true)
     {
         //get unique id for pages and dashlets
@@ -306,36 +306,42 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Checks if the instance is on a supported version.
-    *
-    * @param object $userObj User Obj to set dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if version is supported
-    */
-    function checkversion()
+     * Checks if the instance is on a supported version.
+     *
+     * @param object $userObj User Obj to set dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if version is supported
+     */
+    function checkVersion()
     {
         global $sugar_version;
 
         $match = false;
-        $min_version = '6.5.0';
-        $max_version = '6.5.9';
 
-        if ($sugar_version <= $max_version && $sugar_version >= $min_version)
+        $regexList = array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)');
+
+        $match = false;
+        foreach($regexList as $regex)
         {
-            $match = true;
+            if (preg_match("/{$regex}/", $sugar_version))
+            {
+                $match = true;
+                break;
+            }
         }
-        else
+
+        if (!$match)
         {
-            $GLOBALS['log']->info("Dashboard Manager :: Version check failed | Current version: {$sugar_version} / Acceptable versions: {$min_version}-{$max_version} ");
+            $GLOBALS['log']->fatal("Dashboard Manager :: Version check failed | Current version: {$sugar_version} | Regex List: " . implode(", ", $regexList) . " | Please check SugarForge for an updated package.");
         }
 
         return $match;
     }
 
     /**
-    * Checks if the user should have a locked dashboard.
-    *
-    * @param object $userObj User Obj to set dashboard for. Empty assumes the current user.
-    */
+     * Checks if the user should have a locked dashboard.
+     *
+     * @param object $userObj User Obj to set dashboard for. Empty assumes the current user.
+     */
     function checkLock($userObj = null)
     {
         if (empty($userObj))
@@ -356,11 +362,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Checks user for Dashboard Template associations and applies the template configuration.
-    *
-    * @param object $userObj User Obj to check. Empty assumes the current user.
-    * @return int Returns relationship type
-    */
+     * Checks user for Dashboard Template associations and applies the template configuration.
+     *
+     * @param object $userObj User Obj to check. Empty assumes the current user.
+     * @return int Returns relationship type
+     */
     function checkUser($userObj = null)
     {
         if (empty($userObj))
@@ -381,7 +387,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             $this->retrieve($userObj->dash_dashboardmanager_users_1dash_dashboardmanager_ida);
 
             //get dashboard
-            $user_dashlets = $userObj->getPreference('dashlets', 'Home');
+            $user_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
             $user_dashlet_options = $this->getDashletOptions($user_dashlets);
 
             //retain any existing options for template
@@ -441,15 +447,15 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Merges a users dashlet options into the locked template.
-    * This is run before forcing the template to the user and is done so users can keep exisiting settings.
-    *
-    * 1. Dashlets without identifiers are removed
-    * 2. Dashlets without matching identifiers in template are removed
-    * 3. Dashlets with matching identifiers will have existing user options merged to template
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    */
+     * Merges a users dashlet options into the locked template.
+     * This is run before forcing the template to the user and is done so users can keep exisiting settings.
+     *
+     * 1. Dashlets without identifiers are removed
+     * 2. Dashlets without matching identifiers in template are removed
+     * 3. Dashlets with matching identifiers will have existing user options merged to template
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     */
     function mergeLockedDashboard($userObj = null)
     {
         if (empty($userObj))
@@ -458,20 +464,20 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             $userObj = $current_user;
         }
 
-        $user_dashlets = $userObj->getPreference('dashlets', 'Home');
+        $user_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
         $user_dashlet_options = $this->getDashletOptions($user_dashlets);
 
         $this->setOptionsToTemplate($user_dashlet_options);
     }
 
     /**
-    * Merges dashlet template pages into a users template.
-    *
-    * 1. Matching dashlets will have settings retained
-    * 2. Non matching pages and dashlets are appended after forced pages
-    *
-    * @param object $userObj User Obj to merge dashboard for. Empty assumes the current user.
-    */
+     * Merges dashlet template pages into a users template.
+     *
+     * 1. Matching dashlets will have settings retained
+     * 2. Non matching pages and dashlets are appended after forced pages
+     *
+     * @param object $userObj User Obj to merge dashboard for. Empty assumes the current user.
+     */
     function mergeForcedPageDashboard($userObj = null)
     {
 
@@ -482,8 +488,8 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
         }
 
         //get user dash
-        $user_dashlets = $userObj->getPreference('dashlets', 'Home');
-        $user_pages = $userObj->getPreference('pages', 'Home');
+        $user_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
+        $user_pages = $this->getUserPreference($userObj, 'pages', 'Home');
 
         //get any current options
         $user_dashlet_options = $this->getDashletOptions($user_dashlets);
@@ -511,11 +517,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * removes a dashlet by its identifier
-    *
-    * @param array list of dashlet ids to remove.
-    * @return array $dashlets new list of dashlets
-    */
+     * removes a dashlet by its identifier
+     *
+     * @param array list of dashlet ids to remove.
+     * @return array $dashlets new list of dashlets
+     */
     function removeDashletByIdentifier($ids, $dashlets)
     {
         if (is_string($ids))
@@ -538,11 +544,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * removes a page by its identifier
-    *
-    * @param array list of page ids to remove.
-    * @return array $pages new list of pages
-    */
+     * removes a page by its identifier
+     *
+     * @param array list of page ids to remove.
+     * @return array $pages new list of pages
+     */
     function removePageByIdentifier($ids, $pages)
     {
         if (is_string($ids))
@@ -565,16 +571,16 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Merges a dashlet template into a users template.
-    * This is run before forcing the modified template to the user and is done so users can keep exisiting settings.
-    *
-    * 1. Dashlets without identifiers are shifted but should still be present
-    * 2. Dashlets without matching identifiers in template are removed
-    * 3. Dashlets with matching identifiers will have exisiting user options merged to template
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if dashboard ids exist
-    */
+     * Merges a dashlet template into a users template.
+     * This is run before forcing the modified template to the user and is done so users can keep exisiting settings.
+     *
+     * 1. Dashlets without identifiers are shifted but should still be present
+     * 2. Dashlets without matching identifiers in template are removed
+     * 3. Dashlets with matching identifiers will have exisiting user options merged to template
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if dashboard ids exist
+     */
     function mergeAppendPageDashboard($userObj = null)
     {
 
@@ -585,8 +591,8 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
         }
 
         //get current user dash so we can push changes to it
-        $this->temp_unencoded_pages = $userObj->getPreference('pages', 'Home');
-        $this->temp_unencoded_dashlets = $userObj->getPreference('dashlets', 'Home');
+        $this->temp_unencoded_pages = $this->getUserPreference($userObj, 'pages', 'Home');
+        $this->temp_unencoded_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
 
         if (empty($this->temp_unencoded_pages))
         {
@@ -656,11 +662,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
 
     /**
-    * Appends a dashlet key to a page by page identifier.
-    *
-    * @param string $page_id page identifier
-    * @param string $dashlet_key Key for the dashlet, this is not the identifier
-    */
+     * Appends a dashlet key to a page by page identifier.
+     *
+     * @param string $page_id page identifier
+     * @param string $dashlet_key Key for the dashlet, this is not the identifier
+     */
     function appendDashletToPage($page_id, $dashlet_key)
     {
         foreach ($this->temp_unencoded_pages as $pagekey=>$page)
@@ -679,13 +685,13 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template page identifiers to a users dashboard.
-    * The check includes page positioning. Strict!
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @param boolean $checkPageName Also check against page naming. Empty assumes true.
-    * @return boolean $match Tells if page ids exist
-    */
+     * Compares dashboard template page identifiers to a users dashboard.
+     * The check includes page positioning. Strict!
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @param boolean $checkPageName Also check against page naming. Empty assumes true.
+     * @return boolean $match Tells if page ids exist
+     */
     function pagesCompareStrict($userObj = null, $checkPageName = true, $checkPageCount = true)
     {
         if (empty($userObj))
@@ -723,7 +729,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             && $pageNameMatch
             //page count check result
             && $pageCountMatch
-           )
+        )
         {
             $match = true;
         }
@@ -732,11 +738,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template page count to a users dashboard.
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if page count matches
-    */
+     * Compares dashboard template page count to a users dashboard.
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if page count matches
+     */
     function pageCountCompare($userObj = null)
     {
         if (empty($userObj))
@@ -749,7 +755,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_count = $this->getPageCount($this->temp_unencoded_pages);
-        $user_page_count = $this->getPageCount($userObj->getPreference('pages', 'Home'));
+        $user_page_count = $this->getPageCount($this->getUserPreference($userObj, 'pages', 'Home'));
 
         if ($template_page_count == $user_page_count)
         {
@@ -765,11 +771,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template page tab names to a users dashboard.
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template page tab names to a users dashboard.
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function pageNameCompare($userObj = null)
     {
         if (empty($userObj))
@@ -782,7 +788,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_names = $this->getPageNames($this->temp_unencoded_pages);
-        $user_page_names = $this->getPageNames($userObj->getPreference('pages', 'Home'));
+        $user_page_names = $this->getPageNames($this->getUserPreference($userObj, 'pages', 'Home'));
 
         foreach ($template_page_names as $id=>$value)
         {
@@ -801,11 +807,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template page order to a users dashboard.
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template page order to a users dashboard.
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function pageOrderCompare($userObj = null)
     {
         if (empty($userObj))
@@ -818,7 +824,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_order = $this->getPageOrder($this->temp_unencoded_pages);
-        $user_page_order = $this->getPageOrder($userObj->getPreference('pages', 'Home'));
+        $user_page_order = $this->getPageOrder($this->getUserPreference($userObj, 'pages', 'Home'));
 
         foreach ($template_page_order as $id=>$value)
         {
@@ -838,12 +844,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
 
     /**
-    * Compares dashboard template page identifiers to a users dashboard.
-    * The check excludes page positioning or page count matches. Not strict!
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template page identifiers to a users dashboard.
+     * The check excludes page positioning or page count matches. Not strict!
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function pagesCompare($userObj = null)
     {
         if (empty($userObj))
@@ -856,7 +862,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_ids = $this->getPageIDs($this->temp_unencoded_pages);
-        $user_page_ids = $this->getPageIDs($userObj->getPreference('pages', 'Home'));
+        $user_page_ids = $this->getPageIDs($this->getUserPreference($userObj, 'pages', 'Home'));
 
         foreach ($template_page_ids as $id)
         {
@@ -875,12 +881,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template dashlet identifiers to a users dashboard.
-    * The check excludes positioning and option settings. Not strict!
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template dashlet identifiers to a users dashboard.
+     * The check excludes positioning and option settings. Not strict!
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function dashletCompare($userObj = null)
     {
         if (empty($userObj))
@@ -893,7 +899,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets ids
         $template_dashlet_ids = $this->getDashletIDs($this->temp_unencoded_dashlets);
-        $user_dashlet_ids = $this->getDashletIDs($userObj->getPreference('dashlets', 'Home'));
+        $user_dashlet_ids = $this->getDashletIDs($this->getUserPreference($userObj, 'dashlets', 'Home'));
 
         foreach ($template_dashlet_ids as $id)
         {
@@ -912,11 +918,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template dashlet dimensions to a users dashboard.
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template dashlet dimensions to a users dashboard.
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function dashletDimensionCompare($userObj = null)
     {
         if (empty($userObj))
@@ -929,7 +935,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets dimensions
         $template_dashlet_dimensions = $this->getDashletDimensions($this->temp_unencoded_dashlets);
-        $user_dashlet_dimensions = $this->getDashletDimensions($userObj->getPreference('dashlets', 'Home'));
+        $user_dashlet_dimensions = $this->getDashletDimensions($this->getUserPreference($userObj, 'dashlets', 'Home'));
 
         foreach ($template_dashlet_dimensions as $id=>$value)
         {
@@ -948,11 +954,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template dashlet columns/rows to a users dashboard columns/rows.
-    *
-    * @param object $userObj User object to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template dashlet columns/rows to a users dashboard columns/rows.
+     *
+     * @param object $userObj User object to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function dashletColumnRowCompare($userObj = null)
     {
         if (empty($userObj))
@@ -965,7 +971,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets columns
         $template_dashlet_columns = $this->getDashletColumns($this->temp_unencoded_pages, $this->temp_unencoded_dashlets, false);
-        $user_dashlet_columns = $this->getDashletColumns($userObj->getPreference('pages', 'Home'), $userObj->getPreference('dashlets', 'Home'), false);
+        $user_dashlet_columns = $this->getDashletColumns($this->getUserPreference($userObj, 'pages', 'Home'), $this->getUserPreference($userObj, 'dashlets', 'Home'), false);
 
         //unset any ids from other templates
         foreach ($user_dashlet_columns as $id=>$value)
@@ -990,11 +996,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template dashlet columns to a users dashboard columns.
-    *
-    * @param object $userObj User object to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template dashlet columns to a users dashboard columns.
+     *
+     * @param object $userObj User object to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function dashletColumnCompare($userObj = null)
     {
         if (empty($userObj))
@@ -1007,7 +1013,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets columns
         $template_dashlet_columns = $this->getDashletColumns($this->temp_unencoded_pages, $this->temp_unencoded_dashlets);
-        $user_dashlet_columns = $this->getDashletColumns($userObj->getPreference('pages', 'Home'), $userObj->getPreference('dashlets', 'Home'));
+        $user_dashlet_columns = $this->getDashletColumns($this->getUserPreference($userObj, 'pages', 'Home'), $this->getUserPreference($userObj, 'dashlets', 'Home'));
 
         foreach ($template_dashlet_columns as $id)
         {
@@ -1026,12 +1032,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template dashlets to a users dashboard dashlets.
-    * The check includes dashlet dimensions but NOT option settings.
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template dashlets to a users dashboard dashlets.
+     * The check includes dashlet dimensions but NOT option settings.
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function dashletCompareStrict($userObj = null)
     {
         if (empty($userObj))
@@ -1050,7 +1056,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             $dashletCompare
             && $dashletColumnRowCompare
             && $dashletDimensionCompare
-           )
+        )
         {
             $match = true;
         }
@@ -1059,12 +1065,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template identifiers to a users dashboard.
-    * The check excludes dashboard positioning and option settings. Not strict!
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @return bool $match Tells if compare matches
-    */
+     * Compares dashboard template identifiers to a users dashboard.
+     * The check excludes dashboard positioning and option settings. Not strict!
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @return bool $match Tells if compare matches
+     */
     function dashboardCompare($userObj = null)
     {
         if (empty($userObj))
@@ -1087,13 +1093,13 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template identifiers to a users dashboard.
-    * The check includes dashboard positioning and page naming for tempated pages but not page count. Semi Strict!
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @param bollean $pageNameCompare Adds in check for page naming. Defaults to true.
-    * @return boolean $match Tells if compare matches
-    */
+     * Compares dashboard template identifiers to a users dashboard.
+     * The check includes dashboard positioning and page naming for tempated pages but not page count. Semi Strict!
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @param bollean $pageNameCompare Adds in check for page naming. Defaults to true.
+     * @return boolean $match Tells if compare matches
+     */
     function dashboardCompareSemiStrict($userObj = null, $pageNameCompare = true, $checkPageCount = false)
     {
         if (empty($userObj))
@@ -1117,13 +1123,13 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Compares dashboard template identifiers to a users dashboard.
-    * The check includes dashboard positioning and page naming. Strict!
-    *
-    * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
-    * @param bollean $pageNameCompare Adds in check for page naming. Defaults to true.
-    * @return boolean $match Tells if compare matches
-    */
+     * Compares dashboard template identifiers to a users dashboard.
+     * The check includes dashboard positioning and page naming. Strict!
+     *
+     * @param object $userObj User Obj to compare dashboard for. Empty assumes the current user.
+     * @param bollean $pageNameCompare Adds in check for page naming. Defaults to true.
+     * @return boolean $match Tells if compare matches
+     */
     function dashboardCompareStrict($userObj = null, $pageNameCompare = true, $checkPageCount = true)
     {
         if (empty($userObj))
@@ -1146,11 +1152,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves identifier options from dashlets.
-    *
-    * @param array $dashlets Unencoded dashlets
-    * @return array $dashlet_options List of dashlet identifier options found in the dashboard
-    */
+     * Retrieves identifier options from dashlets.
+     *
+     * @param array $dashlets Unencoded dashlets
+     * @return array $dashlet_options List of dashlet identifier options found in the dashboard
+     */
     function getDashletOptions($dashlets)
     {
         $dashlet_options = array();
@@ -1159,7 +1165,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             if (
                 isset($dashlets[$key]['DashletID']) && !empty($dashlets[$key]['DashletID'])
                 && isset($dashlets[$key]['options']) && !empty($dashlets[$key]['options'])
-               )
+            )
             {
                 $dashlet_options[$dashlets[$key]['DashletID']] = $dashlets[$key]['options'];
             }
@@ -1169,12 +1175,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves identifiers from dashlets.
-    *
-    * @param string $key dashlet key
-    * @param array $dashlets Unencoded dashlets
-    * @return string $dashlet_id Dashlet identifier
-    */
+     * Retrieves identifiers from dashlets.
+     *
+     * @param string $key dashlet key
+     * @param array $dashlets Unencoded dashlets
+     * @return string $dashlet_id Dashlet identifier
+     */
     function getDashletIDByKey($key, $dashlets)
     {
         $dashlet_id = '';
@@ -1187,12 +1193,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves key from dashlets using the identifier.
-    *
-    * @param string $id dashlet identifier
-    * @param array $dashlets Unencoded dashlets
-    * @return string $dashlet_key Dashlet key
-    */
+     * Retrieves key from dashlets using the identifier.
+     *
+     * @param string $id dashlet identifier
+     * @param array $dashlets Unencoded dashlets
+     * @return string $dashlet_key Dashlet key
+     */
     function getDashletKeyByID($id, $dashlets)
     {
         $dashlet_key = '';
@@ -1213,11 +1219,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves dashlet identifiers and dimensions.
-    *
-    * @param array $dashlets Unencoded dashlets
-    * @return array $dashlet_dimensions List of dashlet identifiers and their dimensions found in the dashboard
-    */
+     * Retrieves dashlet identifiers and dimensions.
+     *
+     * @param array $dashlets Unencoded dashlets
+     * @return array $dashlet_dimensions List of dashlet identifiers and their dimensions found in the dashboard
+     */
     function getDashletDimensions($dashlets, $sort = true)
     {
         $dashlet_dimensions = array();
@@ -1238,11 +1244,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves identifiers from dashlets.
-    *
-    * @param array $dashlets Unencoded dashlets
-    * @return array $dashlet_ids List of dashlet identifiers found in the dashboard
-    */
+     * Retrieves identifiers from dashlets.
+     *
+     * @param array $dashlets Unencoded dashlets
+     * @return array $dashlet_ids List of dashlet identifiers found in the dashboard
+     */
     function getDashletIDs($dashlets, $sort = true)
     {
         $dashlet_ids = array();
@@ -1266,11 +1272,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves identifiers from pages.
-    *
-    * @param array $pages Unencoded pages
-    * @return array $page_ids List of page identifiers found in the dashboard
-    */
+     * Retrieves identifiers from pages.
+     *
+     * @param array $pages Unencoded pages
+     * @return array $page_ids List of page identifiers found in the dashboard
+     */
     function getPageIDs($pages, $sort = true)
     {
         $page_ids = array();
@@ -1294,11 +1300,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves pages order for pages with identifiers
-    *
-    * @param array $pages Unencoded pages
-    * @return array $page_order List of page identifiers and their order in the dashboard
-    */
+     * Retrieves pages order for pages with identifiers
+     *
+     * @param array $pages Unencoded pages
+     * @return array $page_order List of page identifiers and their order in the dashboard
+     */
     function getPageOrder($pages, $sort = true)
     {
         $page_order = array();
@@ -1319,11 +1325,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves page count
-    *
-    * @param array $pages Unencoded pages
-    * @return array $page_count Number of pages in the dashboard
-    */
+     * Retrieves page count
+     *
+     * @param array $pages Unencoded pages
+     * @return array $page_count Number of pages in the dashboard
+     */
     function getPageCount($pages)
     {
         $page_count = count($pages);
@@ -1331,11 +1337,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves page names for pages with identifiers
-    *
-    * @param array $pages Unencoded pages
-    * @return array $page_names List of page identifiers and display name in the dashboard
-    */
+     * Retrieves page names for pages with identifiers
+     *
+     * @param array $pages Unencoded pages
+     * @return array $page_names List of page identifiers and display name in the dashboard
+     */
     function getPageNames($pages, $sort = true)
     {
         $page_names = array();
@@ -1356,12 +1362,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves dashlet columns
-    *
-    * @param array $pages Unencoded pages
-    * @param array $dashlets Unencoded dashlets
-    * @return array $page_names List of dashlet identifiers and column in the dashboard
-    */
+     * Retrieves dashlet columns
+     *
+     * @param array $pages Unencoded pages
+     * @param array $dashlets Unencoded dashlets
+     * @return array $page_names List of dashlet identifiers and column in the dashboard
+     */
     function getDashletColumns($pages, $dashlets, $sort = true)
     {
         $dashlet_columns = array();
@@ -1391,11 +1397,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves a page by its identifier.
-    *
-    * @param array $page_id Page identifier
-    * @return array $page Page setup
-    */
+     * Retrieves a page by its identifier.
+     *
+     * @param array $page_id Page identifier
+     * @return array $page Page setup
+     */
     function getPageByID($page_id, $pages)
     {
         $page = array();
@@ -1415,11 +1421,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves a page by a dashlet key.
-    *
-    * @param array $dashlet_key Dashlet key
-    * @return string $page_id Page identifier
-    */
+     * Retrieves a page by a dashlet key.
+     *
+     * @param array $dashlet_key Dashlet key
+     * @return string $page_id Page identifier
+     */
     function getPageIDFromDashletKey($dashlet_key, $pages)
     {
         $page_id = false;
@@ -1449,13 +1455,13 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves the page identifier from a dashlet identifier.
-    *
-    * @param $dashlet_id Dashlet identifier
-    * @param array $dashlets List of dashlets
-    * @param array $pages List of pages
-    * @return string $page_id Page identifier
-    */
+     * Retrieves the page identifier from a dashlet identifier.
+     *
+     * @param $dashlet_id Dashlet identifier
+     * @param array $dashlets List of dashlets
+     * @param array $pages List of pages
+     * @return string $page_id Page identifier
+     */
     function getPageIDFromDashletID($dashlet_id, $dashlets, $pages)
     {
         $page_id = false;
@@ -1475,11 +1481,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves a list of dashlets and their modules.
-    *
-    * @param array $dashlets List of dashlets
-    * @return array $dashlet_modules List of modules that belong to the dashlets
-    */
+     * Retrieves a list of dashlets and their modules.
+     *
+     * @param array $dashlets List of dashlets
+     * @return array $dashlet_modules List of modules that belong to the dashlets
+     */
     function getDashletModules($dashlets)
     {
         $dashlet_modules = array();
@@ -1498,11 +1504,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Retrieves a dashlet by its identifier.
-    *
-    * @param array $page_id Page identifier
-    * @return array $page Page setup
-    */
+     * Retrieves a dashlet by its identifier.
+     *
+     * @param array $page_id Page identifier
+     * @return array $page Page setup
+     */
     function getDashletByID($dashlet_id, $dashlets)
     {
         $dashlet = array();
@@ -1523,11 +1529,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Returns the restricted pages for js use
-    *
-    * @param object $userObj User for access
-    * @return string $js javascript array
-    */
+     * Returns the restricted pages for js use
+     *
+     * @param object $userObj User for access
+     * @return string $js javascript array
+     */
     function getRestrictedPageKeysForJS($userObj = null)
     {
         if (empty($userObj))
@@ -1550,11 +1556,11 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Returns the restricted dashlets for js use
-    *
-    * @param object $userObj User for access
-    * @return string $js javascript array
-    */
+     * Returns the restricted dashlets for js use
+     *
+     * @param object $userObj User for access
+     * @return string $js javascript array
+     */
     function getRestrictedDashletKeysForJS($userObj = null)
     {
         if (empty($userObj))
@@ -1568,7 +1574,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         foreach ($dashlet_ids as $id)
         {
-            array_push($dashlet_keys, $this->getDashletKeyByID($id, $userObj->getPreference('dashlets', 'Home')));
+            array_push($dashlet_keys, $this->getDashletKeyByID($id, $this->getUserPreference($userObj, 'dashlets', 'Home')));
         }
 
         $dashlet_key_string = '"' . implode('","', $dashlet_keys) . '"';
@@ -1578,12 +1584,12 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
     }
 
     /**
-    * Forces the relationship policy between Users and Dashboard Templates.
-    * Users can only belong to 1 relationship in 1 template. Others must be removed.
-    *
-    * @param string $relationship Name of current relationship being used
-    * @param object $userObj User Obj to force policy for. Empty assumes the current user.
-    */
+     * Forces the relationship policy between Users and Dashboard Templates.
+     * Users can only belong to 1 relationship in 1 template. Others must be removed.
+     *
+     * @param string $relationship Name of current relationship being used
+     * @param object $userObj User Obj to force policy for. Empty assumes the current user.
+     */
     function forceRelationshipPolicy($relationship, $userObj = null)
     {
         if (empty($userObj))
@@ -1642,6 +1648,26 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
                 $otherTemplate->dash_dashboardmanager_users_2->delete($otherTemplate->id, $userUpdateObj->id);
             }
         }
+    }
+
+    /**
+     * Returns the ruser preference by name and category
+     *
+     * @param object $userObj User for access
+     * @param string $name name of the preference to retreive
+     * @param string $category name of the category to retreive, defaults to global scope
+     * @param boolean $nullPossible Optional, default false, if set to true it's possible to return NULL
+     * @return mixed the value of the preference (string, array, int etc)
+     */
+    function getUserPreference($userObj, $name, $category, $nullPossible = false)
+    {
+        $userPreference = $userObj->getPreference($name, $category);
+
+        if (is_null($userPreference) && !$nullPossible) {
+            $userPreference = array();
+        }
+
+        return $userPreference;
     }
 
 }
