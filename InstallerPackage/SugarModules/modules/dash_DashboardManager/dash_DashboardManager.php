@@ -146,8 +146,8 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
         global $current_user;
 
         //get current user dash so we can save it
-        $this->unencoded_pages = $current_user->getPreference('pages', 'Home');
-        $this->unencoded_dashlets = $current_user->getPreference('dashlets', 'Home');
+        $this->unencoded_pages = $this->getUserPreference($current_user, 'pages', 'Home');
+        $this->unencoded_dashlets = $this->getUserPreference($current_user, 'dashlets', 'Home');
 
         //check for identifiers
         $this->setIdentifiers();
@@ -387,7 +387,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             $this->retrieve($userObj->dash_dashboardmanager_users_1dash_dashboardmanager_ida);
 
             //get dashboard
-            $user_dashlets = $userObj->getPreference('dashlets', 'Home');
+            $user_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
             $user_dashlet_options = $this->getDashletOptions($user_dashlets);
 
             //retain any existing options for template
@@ -464,7 +464,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             $userObj = $current_user;
         }
 
-        $user_dashlets = $userObj->getPreference('dashlets', 'Home');
+        $user_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
         $user_dashlet_options = $this->getDashletOptions($user_dashlets);
 
         $this->setOptionsToTemplate($user_dashlet_options);
@@ -488,8 +488,8 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
         }
 
         //get user dash
-        $user_dashlets = $userObj->getPreference('dashlets', 'Home');
-        $user_pages = $userObj->getPreference('pages', 'Home');
+        $user_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
+        $user_pages = $this->getUserPreference($userObj, 'pages', 'Home');
 
         //get any current options
         $user_dashlet_options = $this->getDashletOptions($user_dashlets);
@@ -591,8 +591,8 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
         }
 
         //get current user dash so we can push changes to it
-        $this->temp_unencoded_pages = $userObj->getPreference('pages', 'Home');
-        $this->temp_unencoded_dashlets = $userObj->getPreference('dashlets', 'Home');
+        $this->temp_unencoded_pages = $this->getUserPreference($userObj, 'pages', 'Home');
+        $this->temp_unencoded_dashlets = $this->getUserPreference($userObj, 'dashlets', 'Home');
 
         if (empty($this->temp_unencoded_pages))
         {
@@ -755,7 +755,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_count = $this->getPageCount($this->temp_unencoded_pages);
-        $user_page_count = $this->getPageCount($userObj->getPreference('pages', 'Home'));
+        $user_page_count = $this->getPageCount($this->getUserPreference($userObj, 'pages', 'Home'));
 
         if ($template_page_count == $user_page_count)
         {
@@ -788,7 +788,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_names = $this->getPageNames($this->temp_unencoded_pages);
-        $user_page_names = $this->getPageNames($userObj->getPreference('pages', 'Home'));
+        $user_page_names = $this->getPageNames($this->getUserPreference($userObj, 'pages', 'Home'));
 
         foreach ($template_page_names as $id=>$value)
         {
@@ -824,7 +824,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_order = $this->getPageOrder($this->temp_unencoded_pages);
-        $user_page_order = $this->getPageOrder($userObj->getPreference('pages', 'Home'));
+        $user_page_order = $this->getPageOrder($this->getUserPreference($userObj, 'pages', 'Home'));
 
         foreach ($template_page_order as $id=>$value)
         {
@@ -862,7 +862,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get page ids
         $template_page_ids = $this->getPageIDs($this->temp_unencoded_pages);
-        $user_page_ids = $this->getPageIDs($userObj->getPreference('pages', 'Home'));
+        $user_page_ids = $this->getPageIDs($this->getUserPreference($userObj, 'pages', 'Home'));
 
         foreach ($template_page_ids as $id)
         {
@@ -899,7 +899,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets ids
         $template_dashlet_ids = $this->getDashletIDs($this->temp_unencoded_dashlets);
-        $user_dashlet_ids = $this->getDashletIDs($userObj->getPreference('dashlets', 'Home'));
+        $user_dashlet_ids = $this->getDashletIDs($this->getUserPreference($userObj, 'dashlets', 'Home'));
 
         foreach ($template_dashlet_ids as $id)
         {
@@ -935,7 +935,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets dimensions
         $template_dashlet_dimensions = $this->getDashletDimensions($this->temp_unencoded_dashlets);
-        $user_dashlet_dimensions = $this->getDashletDimensions($userObj->getPreference('dashlets', 'Home'));
+        $user_dashlet_dimensions = $this->getDashletDimensions($this->getUserPreference($userObj, 'dashlets', 'Home'));
 
         foreach ($template_dashlet_dimensions as $id=>$value)
         {
@@ -971,7 +971,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets columns
         $template_dashlet_columns = $this->getDashletColumns($this->temp_unencoded_pages, $this->temp_unencoded_dashlets, false);
-        $user_dashlet_columns = $this->getDashletColumns($userObj->getPreference('pages', 'Home'), $userObj->getPreference('dashlets', 'Home'), false);
+        $user_dashlet_columns = $this->getDashletColumns($this->getUserPreference($userObj, 'pages', 'Home'), $this->getUserPreference($userObj, 'dashlets', 'Home'), false);
 
         //unset any ids from other templates
         foreach ($user_dashlet_columns as $id=>$value)
@@ -1013,7 +1013,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         //get dashlets columns
         $template_dashlet_columns = $this->getDashletColumns($this->temp_unencoded_pages, $this->temp_unencoded_dashlets);
-        $user_dashlet_columns = $this->getDashletColumns($userObj->getPreference('pages', 'Home'), $userObj->getPreference('dashlets', 'Home'));
+        $user_dashlet_columns = $this->getDashletColumns($this->getUserPreference($userObj, 'pages', 'Home'), $this->getUserPreference($userObj, 'dashlets', 'Home'));
 
         foreach ($template_dashlet_columns as $id)
         {
@@ -1574,7 +1574,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         foreach ($dashlet_ids as $id)
         {
-            array_push($dashlet_keys, $this->getDashletKeyByID($id, $userObj->getPreference('dashlets', 'Home')));
+            array_push($dashlet_keys, $this->getDashletKeyByID($id, $this->getUserPreference($userObj, 'dashlets', 'Home')));
         }
 
         $dashlet_key_string = '"' . implode('","', $dashlet_keys) . '"';
@@ -1649,6 +1649,26 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
             }
         }
     }
+
+    /**
+    * Returns the ruser preference by name and category
+    *
+    * @param object $userObj User for access
+    * @param string $name name of the preference to retreive
+    * @param string $category name of the category to retreive, defaults to global scope
+    * @param boolean $nullPossible Optional, default false, if set to true it's possible to return NULL
+    * @return mixed the value of the preference (string, array, int etc)
+    */
+    function getUserPreference($userObj, $name, $category, $nullPossible = false)
+    {
+        $userPreference = $userObj->getPreference($name, $category);
+        
+        if (is_null($userPreference) && !$nullPossible) {
+            $userPreference = array();
+        }
+
+        return $userPreference;
+    }    
 
 }
 
