@@ -317,7 +317,7 @@ class dash_DashboardManager extends dash_DashboardManager_sugar
 
         $match = false;
 
-        $regexList = array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)');
+        $regexList = array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)', '6\\.7\\.(.*?)', '6\\.7\\.(.*?)\\.(.*?)');
 
         $match = false;
         foreach($regexList as $regex)
