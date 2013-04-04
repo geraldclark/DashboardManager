@@ -28,19 +28,19 @@
 
 $manifest = array (
     'acceptable_sugar_versions' => array (
-        'regex_matches' => array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)'),
+        'regex_matches' => array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)', '6\\.7\\.(.*?)', '6\\.7\\.(.*?)\\.(.*?)'),
     ),
     'acceptable_sugar_flavors' => array ('CE','PRO','CORP','ENT','ULT'),
     'readme' => '',
     'key' => 'dash',
     'author' => 'jclark',
-    'description' => 'Dashboard Manager: Supported on 6.5.x and 6.6.x',
+    'description' => 'Dashboard Manager: Supported on 6.5.x, 6.6.x, 6.7.x',
     'icon' => '',
     'is_uninstallable' => true,
     'name' => 'Dashboard Manager',
-    'published_date' => '2012-11-26 12:14:07',
+    'published_date' => '2013-04-04 09:11:12',
     'type' => 'module',
-    'version' => '1.6',
+    'version' => '1.7',
     'remove_tables' => 'prompt',
 );
 
